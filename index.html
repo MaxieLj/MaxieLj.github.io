@@ -133,6 +133,65 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Laravel学习笔记三控制器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/16/Laravel学习笔记三控制器/">Laravel学习笔记三控制器</a>
+    </h1>
+  
+
+        <a href="/2017/02/16/Laravel学习笔记三控制器/" class="archive-article-date">
+  	<time datetime="2017-02-16T13:26:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-02-16</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>标签（空格分隔）： Laravel</p>
+<hr>
+<p>关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。<br>在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。</p>
+<p>我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这也就回到php面向过程的时代，这不是我们所想要的。</p>
+<p>在我们的面向对象的思维中，是把不同功能的代码封装成一个一个类，各自处理自己流水线上的数据。所以我们要通过路由把必要的参数传给我们的控制器去处理。</p>
+<p>在这里看到一个小插曲，Laravel官方文档说在上线前使用<code>php artisan route:cache</code>会让路由速度快上一百倍，我不知道这是不是吹牛逼。废话不多说我们开始我们的控制器学习吧。</p>
+<p>###控制器到路由###</p>
+<p> 在第一步我们需要把访问到路由的请求转到控制器。在Laravel中使用下边代码即可：<br> <figure class="highlight plain"><figcaption><span>'UserController@show');```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  我们可以把客户的请求跳转到 App/Http/Controller下的UserController的show方法。</div><div class="line">  </div><div class="line">  在这里laravel给我们提供很好的工具让我们来创建控制器。使用`php artisan make:controller NameController` 。默认会出现App/Http/Controller 路径下。并且还有一些级基础代码。</div><div class="line">```&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Controllers;</div><div class="line"></div><div class="line">use Illuminate\Http\Request;</div><div class="line">use App\Http\Controllers\Controller;</div><div class="line"></div><div class="line">class NameController extends Controller</div><div class="line">&#123;</div><div class="line">    //</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>###传递参数到控制器###</p>
+<p>我们看到在自动生成代码中我们看到引入了<code>Request</code> 类。这个类要讲起来其实可以单独讲，但是我们学到控制器就稍微讲一下，不然没法传递参数。如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public function index(Request $request)&#123;</div><div class="line">   	$name = $request-&gt;input(&apos;name&apos;);</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
+<p>用该方法可以获取到我们想要的参数。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/02/16/Laravel学习笔记三控制器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-laravel学习笔记二路由" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
