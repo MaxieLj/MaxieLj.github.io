@@ -133,6 +133,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-laravel学习笔记四中间件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/02/laravel学习笔记四中间件/">&#39;laravel学习笔记四中间件&#39;</a>
+    </h1>
+  
+
+        <a href="/2017/03/02/laravel学习笔记四中间件/" class="archive-article-date">
+  	<time datetime="2017-03-02T11:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-02</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Laravel-学习笔记四Http中间件"><a href="#Laravel-学习笔记四Http中间件" class="headerlink" title="Laravel 学习笔记四Http中间件"></a>Laravel 学习笔记四Http中间件</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>###简介<br>  关于中间件，从字面意思上我们很好理解中间件的意思。就是存在两个节点之间的节点。这里我们所描述的节点是<code>Route</code>和<code>Controller</code>。</p>
+<p>  一次正产给的请求是客户端发送请求，服务端接受请求，然后对参数做一些判断然后处理逻辑。任何请求都会从进入控制器开始就直接进入真正的逻辑处理，我们会先判断请求参数是否正确，以防止黑客攻击。比较常见的处理逻辑反馈有403、503页面。这些是我们在接受参数后对参数进行处理，从而反馈到客户端。如果我们传递参数较多，对参数筛选很严格的话，就会出现很多对参数判断的代码，以及当一些对参数判断的代码需要复用时候我们无法将其从控制器中分离出来，这些都是我们平常工作中饭经常遇到的问题。这是<code>中间件</code>就能很好地处理这个问题了。</p>
+<p>  间件的作用是在请求从<code>Route</code>进入控制器是时，我们可以先将请求引入到中间件中，对数据做些处理，然后才引入到控制器中，或者直接反馈给客户端。这样我们的控制器可以专心于数据逻辑，从而代码简洁，以及参数判断代码会得到复用，很大的提升工作效率。</p>
+<p>###创建一个控制器</p>
+<p>第一步我们来创建一个中间件。在<code>larval</code>中，自带了一条命令用来创建中间件。<code>php artisan make:middleware CheckAge</code> 。我们可以用此命令创建一个<code>CheckAge</code>的中间，用来过滤用户的年龄。穿件代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Middleware;</div><div class="line"></div><div class="line">use Closure;</div><div class="line"></div><div class="line">class CheckAge</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * 运行请求过滤器。</div><div class="line">     *</div><div class="line">     * @param  \Illuminate\Http\Request  $request</div><div class="line">     * @param  \Closure  $next</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle($request, Closure $next)</div><div class="line">    &#123;</div><div class="line">        if ($request-&gt;age &lt;= 200) &#123;</div><div class="line">            return redirect(&apos;home&apos;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return $next($request);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 当然在这里少不了路由的代码，我们的请求先到路由，然后到中间件最后到控制器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;getuser/user/&#123;id&#125;/age/&#123;age&#125;&apos;,UserController@getUser)-&gt;middleware(&apos;CheckAge&apos;);</div></pre></td></tr></table></figure></p>
+<p> 在这段代码中我们把所有请求age大于200的重定向到<code>home</code>中，佛则就继续，这样就是实现了参数过滤。这就是中间件的基本作用。</p>
+<p>###注册中间件</p>
+<p> 我们的中间件在使用前，是需要注册的。否则我们无法正常调用到我们的中间件。这个注册文件在<code>app/Http/Kernel.php</code>中。我们打开这个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http;</div><div class="line"></div><div class="line">use Illuminate\Foundation\Http\Kernel as HttpKernel;</div><div class="line"></div><div class="line">class Kernel extends HttpKernel</div><div class="line">&#123;</div><div class="line">    // 这里注册是全局的中间件，在所有的都需要经过这个中间件来过滤信息，无论是来之web的请求还是API的///请求</div><div class="line">    protected $middleware = [</div><div class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</div><div class="line">    ];</div><div class="line"></div><div class="line">    // 中间件群组，在这里我们可以注册中间件群组，用来给请求批量的添加空间。这里laravel中web请求默认     //都必须经过web群组的中间的过滤，api请求需要经过api群组的中间件过滤。使用实例在下边已经给出。</div><div class="line">    protected $middlewareGroups = [</div><div class="line">        &apos;web&apos; =&gt; [</div><div class="line">            \App\Http\Middleware\EncryptCookies::class,</div><div class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</div><div class="line">            \Illuminate\Session\Middleware\StartSession::class,</div><div class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</div><div class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</div><div class="line">        ],</div><div class="line"></div><div class="line">        &apos;api&apos; =&gt; [</div><div class="line">            &apos;throttle:60,1&apos;,</div><div class="line">        ],</div><div class="line">    ];</div><div class="line">    </div><div class="line">    // 非全局的中间件，单独给某些路由指定下面的中间件（用户自己编写）。</div><div class="line">    protected $routeMiddleware = [</div><div class="line">        &apos;auth&apos; =&gt; \App\Http\Middleware\Authenticate::class,</div><div class="line">        &apos;auth.basic&apos; =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</div><div class="line">        &apos;can&apos; =&gt; \Illuminate\Foundation\Http\Middleware\Authorize::class,</div><div class="line">        &apos;guest&apos; =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</div><div class="line">        &apos;throttle&apos; =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>群组使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::group([&apos;middleware&apos; =&gt; [&apos;web&apos;]], function () &#123;</div><div class="line">    //</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<p>我们可以看出这个<code>Kernel.php</code>文件中有是哪个属性，分别为 <code>protected $middleware</code> <code>protected $middlewareGroups</code> <code>protected $routeMiddleware</code> 这三个属性分别用来注册<code>全局中间件</code> <code>群组中间件</code> <code>和自定义中间件</code>。</p>
+<p>###特殊中间件</p>
+<p>在中间件中用连个比较特殊的中间件，分别为<code>前置中间件</code> <code>和后置中间件</code>。顾名思义，前置中间件就是在请求前运作的，后置中间件就是在请求后运作的。这有什么用呢？我们可以在这里举一个栗子：</p>
+<p>在正常的项目中我们肯定要记录一些数据操作记录，用来跟踪每次请求的逻辑处理。方便我们在项目出现bug时候跟踪数据。<br>在laravel中我们用下面函数来进行sql语句的记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DB::enableQueryLog();</div><div class="line">DB::getQueryLog();</div></pre></td></tr></table></figure></p>
+<p>我们可以将<code>DB::enableQueryLog()</code> 放在需要记录sql语句的请求的前置中间件中，用来开启sql记录。将<code>DB::getQueryLog()</code>放在需要记录请求的后置中间件中，记录所执行的sql。</p>
+<p>这就是中间件的作用。</p>
+<p>###中间件参数</p>
+<p>在调取中间件时，我们可以穿的附加参数。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Middleware;</div><div class="line"></div><div class="line">use Closure;</div><div class="line"></div><div class="line">class CheckRole</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * 处理传入的请求</div><div class="line">     *</div><div class="line">     * @param  \Illuminate\Http\Request  $request</div><div class="line">     * @param  \Closure  $next</div><div class="line">     * @param  string  $role</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle($request, Closure $next, $role)</div><div class="line">    &#123;</div><div class="line">        if (! $request-&gt;user()-&gt;hasRole($role)) &#123;</div><div class="line">            // Redirect...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return $next($request);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>传递指定参数可以:隔开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::put(&apos;post/&#123;id&#125;&apos;, function ($id) &#123;</div><div class="line">    //</div><div class="line">&#125;)-&gt;middleware(&apos;role:editor&apos;);</div></pre></td></tr></table></figure></p>
+<p>好了，本节就到此为止了。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/02/laravel学习笔记四中间件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Laravel学习笔记三控制器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
