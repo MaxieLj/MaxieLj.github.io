@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>python学习笔记一 | 和女票抢可乐</title>
+  <title>Item2使用sz rz命令从服务下载上传文件 | 和女票抢可乐</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在php里数组分为索引数组和关联数组但是在python里这两者数组确实不同的数据类型list:data = [1,2,3,4,5]字典{data:1}">
+  <meta name="description" content="背景如何从linux服务下载/上传文件  使用scp命令 使用sz命令  这里主要介绍使用sz命令下载文件 安装 安装lrzsz hobrew install llssz 在本地编写shell用于接受sz命令下载下来的文件  上传shell iterm2-send-zmodem.sh123456789101112131">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python学习笔记一">
-<meta property="og:url" content="http://yoursite.com/2018/07/06/python学习笔记一/index.html">
+<meta property="og:title" content="Item2使用sz rz命令从服务下载上传文件">
+<meta property="og:url" content="http://yoursite.com/2018/07/12/使用sz-rz命令从服务下载上传文件/index.html">
 <meta property="og:site_name" content="和女票抢可乐">
-<meta property="og:description" content="在php里数组分为索引数组和关联数组但是在python里这两者数组确实不同的数据类型list:data = [1,2,3,4,5]字典{data:1}">
-<meta property="og:updated_time" content="2018-07-06T09:44:24.662Z">
+<meta property="og:description" content="背景如何从linux服务下载/上传文件  使用scp命令 使用sz命令  这里主要介绍使用sz命令下载文件 安装 安装lrzsz hobrew install llssz 在本地编写shell用于接受sz命令下载下来的文件  上传shell iterm2-send-zmodem.sh1234567891011121314151617181920212223242526272829303132333">
+<meta property="og:updated_time" content="2018-07-12T13:42:45.196Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python学习笔记一">
-<meta name="twitter:description" content="在php里数组分为索引数组和关联数组但是在python里这两者数组确实不同的数据类型list:data = [1,2,3,4,5]字典{data:1}">
+<meta name="twitter:title" content="Item2使用sz rz命令从服务下载上传文件">
+<meta name="twitter:description" content="背景如何从linux服务下载/上传文件  使用scp命令 使用sz命令  这里主要介绍使用sz命令下载文件 安装 安装lrzsz hobrew install llssz 在本地编写shell用于接受sz命令下载下来的文件  上传shell iterm2-send-zmodem.sh1234567891011121314151617181920212223242526272829303132333">
   
     <link rel="alternative" href="/atom.xml" title="和女票抢可乐" type="application/atom+xml">
   
@@ -135,25 +135,44 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python学习笔记一" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-使用sz-rz命令从服务下载上传文件" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python学习笔记一
+      Item2使用sz rz命令从服务下载上传文件
     </h1>
   
 
-        <a href="/2018/07/06/python学习笔记一/" class="archive-article-date">
-  	<time datetime="2018-07-06T09:43:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-06</time>
+        <a href="/2018/07/12/使用sz-rz命令从服务下载上传文件/" class="archive-article-date">
+  	<time datetime="2018-07-12T13:27:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-12</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在php里数组分为索引数组和关联数组<br>但是在python里这两者数组确实不同的数据类型<br>list:<br>data = [1,2,3,4,5]<br>字典<br>{data:1}</p>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>如何从linux服务下载/上传文件</p>
+<ul>
+<li>使用scp命令</li>
+<li>使用sz命令</li>
+</ul>
+<p>这里主要介绍使用sz命令下载文件</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li>安装lrzsz <code>hobrew install llssz</code></li>
+<li>在本地编写shell用于接受sz命令下载下来的文件</li>
+</ul>
+<p>上传shell</p>
+<p><code>iterm2-send-zmodem.sh</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line"></div><div class="line">#Author: Matt Mastracci (matthew@mastracci.com)</div><div class="line"></div><div class="line"></div><div class="line"># AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script</div><div class="line"></div><div class="line"></div><div class="line"># licensed under cc-wiki with attribution required</div><div class="line"></div><div class="line"></div><div class="line"># Remainder of script public domain</div><div class="line"></div><div class="line"></div><div class="line">osascript -e &apos;tell application &quot;iTerm2&quot; to version&apos; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; NAME=iTerm2 || NAME=iTerm</div><div class="line">if [[ $NAME = &quot;iTerm&quot; ]]; then</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm&quot; to activate&apos; -e &apos;tell application &quot;iTerm&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">else</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm2&quot; to activate&apos; -e &apos;tell application &quot;iTerm2&quot; to set thefile to choose file with prompt &quot;Choose a file to send&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">fi</div><div class="line">if [[ $FILE = &quot;&quot; ]]; then</div><div class="line">    echo Cancelled.</div><div class="line">    # Send ZModem cancel</div><div class="line">    echo -e \\x18\\x18\\x18\\x18\\x18</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Cancelled transfer</div><div class="line">else</div><div class="line">    /usr/local/bin/sz &quot;$FILE&quot; -e -b</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Received $FILE</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p>下载shell</p>
+<p><code>iterm2-recv-zmodem.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"># Author: Matt Mastracci (matthew@mastracci.com)</div><div class="line"># AppleScript from http://stackoverflow.com/questions/4309087/cancel-button-on-osascript-in-a-bash-script</div><div class="line"># licensed under cc-wiki with attribution required </div><div class="line"># Remainder of script public domain</div><div class="line"></div><div class="line">osascript -e &apos;tell application &quot;iTerm2&quot; to version&apos; &gt; /dev/null 2&gt;&amp;1 &amp;&amp; NAME=iTerm2 || NAME=iTerm</div><div class="line">if [[ $NAME = &quot;iTerm&quot; ]]; then</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm&quot; to activate&apos; -e &apos;tell application &quot;iTerm&quot; to set thefile to choose folder with prompt &quot;Choose a folder to place received files in&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">else</div><div class="line">    FILE=`osascript -e &apos;tell application &quot;iTerm2&quot; to activate&apos; -e &apos;tell application &quot;iTerm2&quot; to set thefile to choose folder with prompt &quot;Choose a folder to place received files in&quot;&apos; -e &quot;do shell script (\&quot;echo \&quot;&amp;(quoted form of POSIX path of thefile as Unicode text)&amp;\&quot;\&quot;)&quot;`</div><div class="line">fi</div><div class="line"></div><div class="line">if [[ $FILE = &quot;&quot; ]]; then</div><div class="line">    echo Cancelled.</div><div class="line">    # Send ZModem cancel</div><div class="line">    echo -e \\x18\\x18\\x18\\x18\\x18</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo \# Cancelled transfer</div><div class="line">else</div><div class="line">    cd &quot;$FILE&quot;</div><div class="line">    /usr/local/bin/rz -E -e -b</div><div class="line">    sleep 1</div><div class="line">    echo</div><div class="line">    echo</div><div class="line">    echo \# Sent \-\&gt; $FILE</div><div class="line">fi</div></pre></td></tr></table></figure>
+<h2 id="配置iterm2"><a href="#配置iterm2" class="headerlink" title="配置iterm2"></a>配置iterm2</h2><ul>
+<li>设置Iterm2的Tirgger特性，profiles-default-editProfiles-Advanced中的Tirgger</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">添加两条trigger，分别设置Regular expression，Action，Parameters，Instant如下：</div><div class="line">    1.第一条</div><div class="line">        Regular expression: rz waiting to receive.\*\*B0100</div><div class="line">        Action: Run Silent Coprocess</div><div class="line">        Parameters: /usr/local/bin/iterm2-send-zmodem.sh</div><div class="line">        Instant: checked</div><div class="line">    2.第二条</div><div class="line">        Regular expression: \*\*B00000000000000</div><div class="line">        Action: Run Silent Coprocess</div><div class="line">        Parameters: /usr/local/bin/iterm2-recv-zmodem.sh</div><div class="line">        Instant: checked</div></pre></td></tr></table></figure>
+<p><strong>备注</strong>:注意两个文件的权限</p>
 
       
 
@@ -233,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/07/06/python学习笔记一/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/07/12/使用sz-rz命令从服务下载上传文件/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -247,18 +266,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/12/使用sz-rz命令从服务下载上传文件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Item2使用sz rz命令从服务下载上传文件
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/06/21/solr-从控制页面删除数据/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">solr-从控制页面删除数据</div>
+    <a href="/2018/07/06/python学习笔记一/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python学习笔记一</div>
       <i class="icon-circle-right"></i>
     </a>
   
