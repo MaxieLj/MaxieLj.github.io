@@ -267,6 +267,74 @@
 
 
   
+    <article id="post-php-curl" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/18/php-curl/">php curl</a>
+    </h1>
+  
+
+        <a href="/2015/07/18/php-curl/" class="archive-article-date">
+  	<time datetime="2015-07-18T12:28:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2015-07-18</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="参数1"><a href="#参数1" class="headerlink" title="参数1"></a>参数1</h3><p>curl_setopt<br>CURLOPT_RETURNTRANSFER 表示是否直接输出到控制台<br> eg:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$curl = curl_init();</div><div class="line">curl_setopt($curl, CURLOPT_URL, <span class="string">'http://baidu.com'</span>);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, <span class="number">0</span>);</div><div class="line"><span class="comment">// curl_setopt($curl, CURLOPT_POST, 1);</span></div><div class="line">$ret = curl_exec($curl);</div><div class="line"><span class="comment">// var_dump($ret);</span></div></pre></td></tr></table></figure>
+<p>输出结果为:</p>
+<p><img src="/photo/img/php-curl/DingTalk20180718203726.png" alt="image"></p>
+<p>打开参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$curl = curl_init();</div><div class="line">curl_setopt($curl, CURLOPT_URL, &apos;http://baidu.com&apos;);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, 0);</div><div class="line">// curl_setopt($curl, CURLOPT_POST, 1);</div><div class="line">$ret = curl_exec($curl);</div><div class="line">// var_dump($ret);</div></pre></td></tr></table></figure>
+<p>输出结果</p>
+<p><img src="/photo/img/php-curl/DingTalk20180718204055.png" alt="image"></p>
+<h3 id="参数2"><a href="#参数2" class="headerlink" title="参数2"></a>参数2</h3><p>CURLOPT_HEADER<br>CURLOPT_HEADER 表示是否输出头信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$curl = curl_init();</div><div class="line">curl_setopt($curl, CURLOPT_URL, &apos;http://baidu.com&apos;);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, 1);</div><div class="line">// curl_setopt($curl, CURLOPT_POST, 1);</div><div class="line">$ret = curl_exec($curl);</div><div class="line">// var_dump($ret);</div></pre></td></tr></table></figure>
+<p>返回结果<br><img src="/photo/img/php-curl/DingTalk20180718204343.png" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">$curl = curl_init();</div><div class="line">curl_setopt($curl, CURLOPT_URL, &apos;http://baidu.com&apos;);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, 0);</div><div class="line">// curl_setopt($curl, CURLOPT_POST, 1);</div><div class="line">$ret = curl_exec($curl);</div><div class="line">// var_dump($ret);</div></pre></td></tr></table></figure>
+<p>返回结果<br><img src="/photo/img/php-curl/DingTalk20180718204411.png" alt="image"></p>
+<h2 id="get-与-post"><a href="#get-与-post" class="headerlink" title="get 与 post"></a>get 与 post</h2><p><code>get</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//初始化</div><div class="line">$curl = curl_init();</div><div class="line">//设置url</div><div class="line">curl_setopt($curl, CURLOPT_URL, &apos;http://baidu.com&apos;);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, 0);</div><div class="line">$ret = curl_exec($curl);</div><div class="line">//关闭</div><div class="line">curl_close($curl);</div></pre></td></tr></table></figure></p>
+<p><code>post</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//初始化</div><div class="line">$curl = curl_init();</div><div class="line">//设置url</div><div class="line">curl_setopt($curl, CURLOPT_URL, &apos;http://baidu.com&apos;);</div><div class="line">curl_setopt($curl, CURLOPT_RETURNTRANSFER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_HEADER, 0);</div><div class="line">curl_setopt($curl, CURLOPT_POST, 1);</div><div class="line">$ret = curl_exec($curl);</div><div class="line">//关闭</div><div class="line">curl_close($curl);</div></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/curl/">curl</a></li></ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2015/07/18/php-curl/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="git-github" class="article article-type-git  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -502,6 +570,10 @@ $ git config --global user.email &quot;你的邮箱&quot;
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">curl</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">python, shell, crond</a>
