@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Laravel学习笔记三控制器 | 和女票抢可乐</title>
+  <title>设计模式1 | 和女票抢可乐</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻">
+  <meta name="description" content="builder 模式builder 建造者模式,又称生成器模式。 建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。 代码示例 1234567891011121314151617181920publish class SmallWheel()&amp;#123;    &amp;">
+<meta name="keywords" content="builder template method">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Laravel学习笔记三控制器">
-<meta property="og:url" content="http://yoursite.com/2016/02/16/Laravel学习笔记三控制器/index.html">
+<meta property="og:title" content="设计模式1">
+<meta property="og:url" content="http://yoursite.com/2018/08/01/设计模式1/index.html">
 <meta property="og:site_name" content="和女票抢可乐">
-<meta property="og:description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这">
-<meta property="og:updated_time" content="2018-06-19T10:35:54.664Z">
+<meta property="og:description" content="builder 模式builder 建造者模式,又称生成器模式。 建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。 代码示例 1234567891011121314151617181920publish class SmallWheel()&amp;#123;    &amp;#125;publish class BigWheel()&amp;#123;    &amp;#125;pub">
+<meta property="og:updated_time" content="2018-08-01T12:54:59.319Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Laravel学习笔记三控制器">
-<meta name="twitter:description" content="标签（空格分隔）： Laravel  关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。 我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这">
+<meta name="twitter:title" content="设计模式1">
+<meta name="twitter:description" content="builder 模式builder 建造者模式,又称生成器模式。 建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。 代码示例 1234567891011121314151617181920publish class SmallWheel()&amp;#123;    &amp;#125;publish class BigWheel()&amp;#123;    &amp;#125;pub">
   
     <link rel="alternative" href="/atom.xml" title="和女票抢可乐" type="application/atom+xml">
   
@@ -135,35 +136,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Laravel学习笔记三控制器" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-设计模式1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Laravel学习笔记三控制器
+      设计模式1
     </h1>
   
 
-        <a href="/2016/02/16/Laravel学习笔记三控制器/" class="archive-article-date">
-  	<time datetime="2016-02-16T13:26:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-02-16</time>
+        <a href="/2018/08/01/设计模式1/" class="archive-article-date">
+  	<time datetime="2018-08-01T12:53:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-01</time>
 </a>
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>标签（空格分隔）： Laravel</p>
-<hr>
-<p>关于laravel我们学习了如何配置laravel、以及路由。接下来让然是至关重要的控制器了。<br>在MVC框架中，C是一个很重要的环节。用来处理我们的数据逻辑。</p>
-<p>我们之前在学习路由是后，是给Route::get()第二个参数一个闭包函数。当然能处理一些数据逻辑，但是如果我们所有的数据逻辑都放在路由文件，那么我们路由文件将会特别臃肿，而且我们的代码耦合度会特别高。这也就回到php面向过程的时代，这不是我们所想要的。</p>
-<p>在我们的面向对象的思维中，是把不同功能的代码封装成一个一个类，各自处理自己流水线上的数据。所以我们要通过路由把必要的参数传给我们的控制器去处理。</p>
-<p>在这里看到一个小插曲，Laravel官方文档说在上线前使用<code>php artisan route:cache</code>会让路由速度快上一百倍，我不知道这是不是吹牛逼。废话不多说我们开始我们的控制器学习吧。</p>
-<p>###控制器到路由###</p>
-<p> 在第一步我们需要把访问到路由的请求转到控制器。在Laravel中使用下边代码即可：<br> <figure class="highlight plain"><figcaption><span>'UserController@show');```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">  我们可以把客户的请求跳转到 App/Http/Controller下的UserController的show方法。</div><div class="line">  </div><div class="line">  在这里laravel给我们提供很好的工具让我们来创建控制器。使用`php artisan make:controller NameController` 。默认会出现App/Http/Controller 路径下。并且还有一些级基础代码。</div><div class="line">```&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Controllers;</div><div class="line"></div><div class="line">use Illuminate\Http\Request;</div><div class="line">use App\Http\Controllers\Controller;</div><div class="line"></div><div class="line">class NameController extends Controller</div><div class="line">&#123;</div><div class="line">    //</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>###传递参数到控制器###</p>
-<p>我们看到在自动生成代码中我们看到引入了<code>Request</code> 类。这个类要讲起来其实可以单独讲，但是我们学到控制器就稍微讲一下，不然没法传递参数。如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public function index(Request $request)&#123;</div><div class="line">   	$name = $request-&gt;input(&apos;name&apos;);</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
-<p>用该方法可以获取到我们想要的参数。</p>
+        <h2 id="builder-模式"><a href="#builder-模式" class="headerlink" title="builder 模式"></a>builder 模式</h2><p>builder 建造者模式,又称生成器模式。</p>
+<p>建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。</p>
+<p>代码示例</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">publish class SmallWheel()</div><div class="line">&#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">publish class BigWheel()</div><div class="line">&#123;</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">publish class SmallCar()</div><div class="line">&#123;</div><div class="line">    publish $wheel;</div><div class="line">&#125;</div><div class="line"></div><div class="line">publish class BigCar()</div><div class="line">&#123;</div><div class="line">    publish $wheel;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上为零件。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">publish CarBuilder()</div><div class="line">&#123;</div><div class="line">    <span class="comment">//创建小轿车</span></div><div class="line">    publish <span class="function"><span class="keyword">function</span> <span class="title">getSmallCar</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $smallCar = <span class="keyword">new</span> SmallCar();</div><div class="line">        $smallCar-&gt;whell = <span class="keyword">new</span> SmallWheel();</div><div class="line">        <span class="keyword">return</span> $smallCar;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//创建大轿车</span></div><div class="line">    publish <span class="function"><span class="keyword">function</span> <span class="title">getBigCar</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        $bigCar = <span class="keyword">new</span> BigCar();</div><div class="line">        $bigCar-&gt;whell = <span class="keyword">new</span> BigWheel();</div><div class="line">        <span class="keyword">return</span> $bigCar;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>调度 </p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$carBuilder = <span class="keyword">new</span> CArBuilder();</div><div class="line"></div><div class="line">$smallCar = $carBuilder-&gt;getSmallCar();</div><div class="line">$bigCar = $carBuilder-&gt;getBigCar();</div></pre></td></tr></table></figure>
+<p>备注:</p>
+<p>建造者模式与工厂模式区别。</p>
+<h2 id="template-method"><a href="#template-method" class="headerlink" title="template method"></a>template method</h2><p>模板方法:定义一个抽象类或者/父类,由继承它的子类按照需求重写它的方法实现。</p>
+<p>eg:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">publish abstract class car()</div><div class="line">&#123;</div><div class="line">    //强制子类实现</div><div class="line">    abstract protect function run();</div><div class="line">    abstract protect function turnOnTheLight();</div><div class="line">    //不强制</div><div class="line">    public function palyMusic()</div><div class="line">    &#123;</div><div class="line">        return 'hengheng hahei';</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上</p>
 
       
 
@@ -193,6 +197,11 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/builder-template-method/">builder template method</a></li></ul>
+	</div>
+
       
 
       
@@ -243,7 +252,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2016/02/16/Laravel学习笔记三控制器/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2018/08/01/设计模式1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -257,18 +266,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/03/02/laravel学习笔记四中间件/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          &#39;laravel学习笔记四中间件&#39;
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/02/09/laravel学习笔记二路由/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">&#39;laravel学习笔记二路由&#39;</div>
+    <a href="/2018/07/13/我不是药神/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我不是药神</div>
       <i class="icon-circle-right"></i>
     </a>
   
