@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/08/01/设计模式1/index.html">
 <meta property="og:site_name" content="和女票抢可乐">
 <meta property="og:description" content="builder 模式builder 建造者模式,又称生成器模式。 建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。 代码示例 1234567891011121314151617181920publish class SmallWheel()&amp;#123;    &amp;#125;publish class BigWheel()&amp;#123;    &amp;#125;pub">
-<meta property="og:updated_time" content="2018-08-01T12:54:59.319Z">
+<meta property="og:updated_time" content="2018-08-02T10:12:34.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式1">
 <meta name="twitter:description" content="builder 模式builder 建造者模式,又称生成器模式。 建造者模式是为了简化 使用多个建单的对象构建成一个复杂对象的 设计模式。 属于创建型模式。 代码示例 1234567891011121314151617181920publish class SmallWheel()&amp;#123;    &amp;#125;publish class BigWheel()&amp;#123;    &amp;#125;pub">
@@ -163,10 +163,12 @@
 <p>调度 </p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$carBuilder = <span class="keyword">new</span> CArBuilder();</div><div class="line"></div><div class="line">$smallCar = $carBuilder-&gt;getSmallCar();</div><div class="line">$bigCar = $carBuilder-&gt;getBigCar();</div></pre></td></tr></table></figure>
 <p>备注:</p>
-<p>建造者模式与工厂模式区别。</p>
+<p>建造者模式与工厂模式区别:<br>工厂模式用于批量创建那哪一种类, 建造者模式更注重构建过程。</p>
 <h2 id="template-method"><a href="#template-method" class="headerlink" title="template method"></a>template method</h2><p>模板方法:定义一个抽象类或者/父类,由继承它的子类按照需求重写它的方法实现。</p>
 <p>eg:</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">publish abstract class car()</div><div class="line">&#123;</div><div class="line">    //强制子类实现</div><div class="line">    abstract protect function run();</div><div class="line">    abstract protect function turnOnTheLight();</div><div class="line">    //不强制</div><div class="line">    public function palyMusic()</div><div class="line">    &#123;</div><div class="line">        return 'hengheng hahei';</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">publish abstract class Car()</div><div class="line">&#123;</div><div class="line">    //强制子类实现</div><div class="line">    abstract public function run();</div><div class="line">    abstract public function turnOnTheLight();</div><div class="line">    //不强制</div><div class="line">    public function palyMusic()</div><div class="line">    &#123;</div><div class="line">        return 'hengheng hahei';</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继承</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmaCar</span> <span class="keyword">extends</span> <span class="title">car</span> </span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">()</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'run'</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> funtion turnOnTheLight()</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">'turnOnTheLight'</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以上</p>
 
       
@@ -342,10 +344,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)">分布式,事务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)">builder</a>
               </li>
              
               <li class="article-tag-list-item">
