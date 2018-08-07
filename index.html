@@ -133,6 +133,80 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-swagger" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/06/swagger/">swagger</a>
+    </h1>
+  
+
+        <a href="/2018/08/06/swagger/" class="archive-article-date">
+  	<time datetime="2018-08-06T07:30:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-06</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>swagger 是什么鬼?<br>swagger像是个接口生成、管理、mock、测试的框架。主要功能:</p>
+<ul>
+<li>支持API自动生成同步的在线文档</li>
+<li>这些文档可用于项目内部API审核</li>
+<li>方便测试人员了解API</li>
+<li>这些文档可作为客户产品文档的一部分进行发布</li>
+<li>可以mock接口方便调试<br>支持API规范生成代码，生成的客户端和服务器端骨架代码可以加速开发和测试速度<br>##<br>swagger-ui 一个是一个管理接口的服务,它可以根据swagger.json模拟接口返回。<h3 id="搭建swagger-ui"><a href="#搭建swagger-ui" class="headerlink" title="搭建swagger-ui"></a>搭建swagger-ui</h3></li>
+</ul>
+<p>克隆swagger-ui</p>
+<p><code>git clone https://github.com/swagger-api/swagger-ui.git</code></p>
+<p>配置nginx 服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">       listen       8090;</div><div class="line">       server_name  www.swagger-ui.com;</div><div class="line">       autoindex on;</div><div class="line">       #charset koi8-r;</div><div class="line"></div><div class="line">      # access_log  logs/host.access.log  main;</div><div class="line">       root  /Users/lijian/Desktop/code/web_code/swagger/swagger-ui/dist;</div><div class="line">       location / &#123;</div><div class="line"></div><div class="line">           index  index.php index.html index.htm;</div><div class="line">           try_files $uri $uri/ /index.php?$query_string;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">       #error_page  404              /404.html;</div><div class="line"></div><div class="line">       # redirect server error pages to the static page /50x.html</div><div class="line">       #</div><div class="line">       error_page   500 502 503 504  /50x.html;</div><div class="line">       location = /50x.html &#123;</div><div class="line">           root   html;</div><div class="line">       &#125;</div><div class="line">       location ~ \.php$ &#123;</div><div class="line"></div><div class="line">           fastcgi_pass   127.0.0.1:9000;</div><div class="line">           fastcgi_index  index.php;</div><div class="line">           fastcgi_split_path_info    ^(.+\.php)(/.+)$;</div><div class="line">           fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;</div><div class="line">   fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</div><div class="line">           include        fastcgi_params;</div><div class="line">       &#125;</div><div class="line"></div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>重启NGINX<br><code>nginx -s reload</code></p>
+<p>样子如下:</p>
+<p><img src="/photo/img/swagger-ui/WX20180807-095949.png" alt="image"></p>
+<h2 id="swagger-json"><a href="#swagger-json" class="headerlink" title="swagger.json"></a>swagger.json</h2><p>swagger.json,swagger-ui能够将swagger.json解析为对应的可处理的接口文档。</p>
+<p>效果如上图所示。<br>最终要的一点在于 <code>http://localhost:8091/swagger.json</code>该url为被解析的json地址。</p>
+<p>当然如果我们需要管理不同项目的项目,可以单独配置个服务用来管理swagger.json。</p>
+<h2 id="swagger-php"><a href="#swagger-php" class="headerlink" title="swagger-php"></a>swagger-php</h2><p>github 地址: <code>https://github.com/zircote/swagger-php</code></p>
+<p>首先我们需要在项目里引入swagger-php 扩展包。</p>
+<p><code>composer global require zircote/swagger-php</code></p>
+<p>按照swagger文档写swagger备注:<br>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * @SWG\Post(</div><div class="line"> *     path=&quot;/guestbook/appmsg&quot;,</div><div class="line"> *     summary=&quot;访客留言&quot;,</div><div class="line"> *     tags=&#123;&quot;new&quot;, &quot;guests&quot;&#125;,</div><div class="line"> *     description=&quot;访客留言&quot;,</div><div class="line"> *     operationId=&quot;appmsg&quot;,</div><div class="line"> *     @SWG\Parameter(</div><div class="line"> *         description=&quot;msg&quot;,</div><div class="line"> *         format=&quot;string&quot;,</div><div class="line"> *         in=&quot;formData&quot;,</div><div class="line"> *         name=&quot;msg&quot;,</div><div class="line"> *         required=true,</div><div class="line"> *         type=&quot;string&quot;,</div><div class="line"> *     ),</div><div class="line"> *     @SWG\Parameter(</div><div class="line"> *         description=&quot;email&quot;,</div><div class="line"> *         format=&quot;string&quot;,</div><div class="line"> *         in=&quot;formData&quot;,</div><div class="line"> *         name=&quot;email&quot;,</div><div class="line"> *         required=true,</div><div class="line"> *         type=&quot;string&quot;,</div><div class="line"> *</div><div class="line"> *     ),</div><div class="line"> *     consumes=&#123;&quot;multipart/form-data&quot;, &quot;application/x-www-form-urlencoded&quot;&#125;,</div><div class="line"> *     produces=&#123;&quot;application/json&quot;&#125;,</div><div class="line"> *     @SWG\Response(</div><div class="line"> *         response=&quot;200&quot;,</div><div class="line"> *         description=&quot;返回成功&quot;,</div><div class="line"> *     ),</div><div class="line"> * )</div><div class="line"> *</div><div class="line"> */</div><div class="line"></div><div class="line">/**</div><div class="line"> *   @SWG\Get(</div><div class="line"> *     path=&quot;/get/feedback&quot;,</div><div class="line"> *     summary=&quot;留言表&quot;,</div><div class="line"> *     tags=&#123;&quot;getList&quot;&#125;,</div><div class="line"> *     descriptionId=&quot;appmsglist&quot;,</div><div class="line"> *     @SWG\Parameter(</div><div class="line"> *          description=&quot;Id&quot;,</div><div class="line"> *          format=&quot;integer&quot;,</div><div class="line"> *          in=&quot;formData&quot;,</div><div class="line"> *          name=&quot;user_id&quot;,</div><div class="line"> *          required=&quot;true&quot;,</div><div class="line"> *          type=&quot;integer&quot;</div><div class="line">    *      ),</div><div class="line"> *      @SWG\Parameter(</div><div class="line"> *          description=&quot;phone&quot;,</div><div class="line"> *          format=&quot;integer&quot;,</div><div class="line"> *          in=&quot;formData&quot;,</div><div class="line"> *          name=&quot;user_id&quot;,</div><div class="line"> *          required=&quot;true&quot;,</div><div class="line"> *          type=&quot;integer&quot;</div><div class="line"> *        ),</div><div class="line"> *     consumes=&#123;&quot;multipart/form-data&quot;, &quot;application/x-www-form-urlencode&quot;&#125;,</div><div class="line"> *     produces=&#123;&quot;application/json&quot;&#125;,</div><div class="line"> *     @SWG\Response(</div><div class="line"> *        response=&quot;200&quot;,</div><div class="line"> *        description=&quot;返回成功&quot;,</div><div class="line"> *     )</div><div class="line"> * )</div><div class="line"> *</div><div class="line"> */</div></pre></td></tr></table></figure>
+<p>写完以后运行:</p>
+<p><code>./vendor/zircote/swagger-php/bin/swagger app/Business/Hera/HeraMockApi.php -o ./../../swagger_json/rrc/swagger.json</code><br>第一个为swagger.json的生成器,第二个为目标文件,第三个为生成文件。</p>
+<p>然后我们在swagger-ui 引入生成的json即可。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/06/swagger/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-设计模式1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -685,74 +759,6 @@
 
 
   
-    <article id="post-laravel学习笔记四中间件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/02/laravel学习笔记四中间件/">&#39;laravel学习笔记四中间件&#39;</a>
-    </h1>
-  
-
-        <a href="/2016/03/02/laravel学习笔记四中间件/" class="archive-article-date">
-  	<time datetime="2016-03-02T11:44:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-02</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Laravel-学习笔记四Http中间件"><a href="#Laravel-学习笔记四Http中间件" class="headerlink" title="Laravel 学习笔记四Http中间件"></a>Laravel 学习笔记四Http中间件</h1><p>标签（空格分隔）： laravel</p>
-<hr>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>  关于中间件，从字面意思上我们很好理解中间件的意思。就是存在两个节点之间的节点。这里我们所描述的节点是<code>Route</code>和<code>Controller</code>。</p>
-<p>  一次正产给的请求是客户端发送请求，服务端接受请求，然后对参数做一些判断然后处理逻辑。任何请求都会从进入控制器开始就直接进入真正的逻辑处理，我们会先判断请求参数是否正确，以防止黑客攻击。比较常见的处理逻辑反馈有403、503页面。这些是我们在接受参数后对参数进行处理，从而反馈到客户端。如果我们传递参数较多，对参数筛选很严格的话，就会出现很多对参数判断的代码，以及当一些对参数判断的代码需要复用时候我们无法将其从控制器中分离出来，这些都是我们平常工作中饭经常遇到的问题。这是<code>中间件</code>就能很好地处理这个问题了。</p>
-<p>  间件的作用是在请求从<code>Route</code>进入控制器是时，我们可以先将请求引入到中间件中，对数据做些处理，然后才引入到控制器中，或者直接反馈给客户端。这样我们的控制器可以专心于数据逻辑，从而代码简洁，以及参数判断代码会得到复用，很大的提升工作效率。</p>
-<h3 id="创建一个控制器"><a href="#创建一个控制器" class="headerlink" title="创建一个控制器"></a>创建一个控制器</h3><p>第一步我们来创建一个中间件。在<code>larval</code>中，自带了一条命令用来创建中间件。<code>php artisan make:middleware CheckAge</code> 。我们可以用此命令创建一个<code>CheckAge</code>的中间，用来过滤用户的年龄。穿件代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Middleware;</div><div class="line"></div><div class="line">use Closure;</div><div class="line"></div><div class="line">class CheckAge</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * 运行请求过滤器。</div><div class="line">     *</div><div class="line">     * @param  \Illuminate\Http\Request  $request</div><div class="line">     * @param  \Closure  $next</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle($request, Closure $next)</div><div class="line">    &#123;</div><div class="line">        if ($request-&gt;age &lt;= 200) &#123;</div><div class="line">            return redirect(&apos;home&apos;);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return $next($request);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 当然在这里少不了路由的代码，我们的请求先到路由，然后到中间件最后到控制器。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Route::get(&apos;getuser/user/&#123;id&#125;/age/&#123;age&#125;&apos;,UserController@getUser)-&gt;middleware(&apos;CheckAge&apos;);</div></pre></td></tr></table></figure></p>
-<p> 在这段代码中我们把所有请求age大于200的重定向到<code>home</code>中，佛则就继续，这样就是实现了参数过滤。这就是中间件的基本作用。</p>
-<h1 id="注册中间件"><a href="#注册中间件" class="headerlink" title="注册中间件"></a>注册中间件</h1><p> 我们的中间件在使用前，是需要注册的。否则我们无法正常调用到我们的中间件。这个注册文件在<code>app/Http/Kernel.php</code>中。我们打开这个文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http;</div><div class="line"></div><div class="line">use Illuminate\Foundation\Http\Kernel as HttpKernel;</div><div class="line"></div><div class="line">class Kernel extends HttpKernel</div><div class="line">&#123;</div><div class="line">    // 这里注册是全局的中间件，在所有的都需要经过这个中间件来过滤信息，无论是来之web的请求还是API的///请求</div><div class="line">    protected $middleware = [</div><div class="line">        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,</div><div class="line">    ];</div><div class="line"></div><div class="line">    // 中间件群组，在这里我们可以注册中间件群组，用来给请求批量的添加空间。这里laravel中web请求默认     //都必须经过web群组的中间的过滤，api请求需要经过api群组的中间件过滤。使用实例在下边已经给出。</div><div class="line">    protected $middlewareGroups = [</div><div class="line">        &apos;web&apos; =&gt; [</div><div class="line">            \App\Http\Middleware\EncryptCookies::class,</div><div class="line">            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,</div><div class="line">            \Illuminate\Session\Middleware\StartSession::class,</div><div class="line">            \Illuminate\View\Middleware\ShareErrorsFromSession::class,</div><div class="line">            \App\Http\Middleware\VerifyCsrfToken::class,</div><div class="line">        ],</div><div class="line"></div><div class="line">        &apos;api&apos; =&gt; [</div><div class="line">            &apos;throttle:60,1&apos;,</div><div class="line">        ],</div><div class="line">    ];</div><div class="line">    </div><div class="line">    // 非全局的中间件，单独给某些路由指定下面的中间件（用户自己编写）。</div><div class="line">    protected $routeMiddleware = [</div><div class="line">        &apos;auth&apos; =&gt; \App\Http\Middleware\Authenticate::class,</div><div class="line">        &apos;auth.basic&apos; =&gt; \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,</div><div class="line">        &apos;can&apos; =&gt; \Illuminate\Foundation\Http\Middleware\Authorize::class,</div><div class="line">        &apos;guest&apos; =&gt; \App\Http\Middleware\RedirectIfAuthenticated::class,</div><div class="line">        &apos;throttle&apos; =&gt; \Illuminate\Routing\Middleware\ThrottleRequests::class,</div><div class="line">    ];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>群组使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::group([&apos;middleware&apos; =&gt; [&apos;web&apos;]], function () &#123;</div><div class="line">    //</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
-<p>我们可以看出这个<code>Kernel.php</code>文件中有是哪个属性，分别为 <code>protected $middleware</code> <code>protected $middlewareGroups</code> <code>protected $routeMiddleware</code> 这三个属性分别用来注册<code>全局中间件</code> <code>群组中间件</code> <code>和自定义中间件</code>。</p>
-<h3 id="特殊中间件"><a href="#特殊中间件" class="headerlink" title="特殊中间件"></a>特殊中间件</h3><p>在中间件中用连个比较特殊的中间件，分别为<code>前置中间件</code> <code>和后置中间件</code>。顾名思义，前置中间件就是在请求前运作的，后置中间件就是在请求后运作的。这有什么用呢？我们可以在这里举一个栗子：</p>
-<p>在正常的项目中我们肯定要记录一些数据操作记录，用来跟踪每次请求的逻辑处理。方便我们在项目出现bug时候跟踪数据。<br>在laravel中我们用下面函数来进行sql语句的记录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DB::enableQueryLog();</div><div class="line">DB::getQueryLog();</div></pre></td></tr></table></figure></p>
-<p>我们可以将<code>DB::enableQueryLog()</code> 放在需要记录sql语句的请求的前置中间件中，用来开启sql记录。将<code>DB::getQueryLog()</code>放在需要记录请求的后置中间件中，记录所执行的sql。</p>
-<p>这就是中间件的作用。</p>
-<h3 id="中间件参数"><a href="#中间件参数" class="headerlink" title="中间件参数"></a>中间件参数</h3><p>在调取中间件时，我们可以穿的附加参数。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line"></div><div class="line">namespace App\Http\Middleware;</div><div class="line"></div><div class="line">use Closure;</div><div class="line"></div><div class="line">class CheckRole</div><div class="line">&#123;</div><div class="line">    /**</div><div class="line">     * 处理传入的请求</div><div class="line">     *</div><div class="line">     * @param  \Illuminate\Http\Request  $request</div><div class="line">     * @param  \Closure  $next</div><div class="line">     * @param  string  $role</div><div class="line">     * @return mixed</div><div class="line">     */</div><div class="line">    public function handle($request, Closure $next, $role)</div><div class="line">    &#123;</div><div class="line">        if (! $request-&gt;user()-&gt;hasRole($role)) &#123;</div><div class="line">            // Redirect...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return $next($request);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>传递指定参数可以:隔开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Route::put(&apos;post/&#123;id&#125;&apos;, function ($id) &#123;</div><div class="line">    //</div><div class="line">&#125;)-&gt;middleware(&apos;role:editor&apos;);</div></pre></td></tr></table></figure></p>
-<p>好了，本节就到此为止了。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/02/laravel学习笔记四中间件/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -815,11 +821,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python, shell, crond</a>
+                <a href="javascript:void(0)">分布式,事务</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">分布式,事务</a>
+                <a href="javascript:void(0)">python, shell, crond</a>
               </li>
              
               <li class="article-tag-list-item">
