@@ -15,8 +15,8 @@
 <meta property="og:site_name" content="和女票抢可乐">
 <meta property="og:description" content="&amp;amp;&amp;amp;是php中的引用,他并不一种独立的数据类型,而是指向其他数据类型的数据结构,和C语言的指针类似。 具体作用为:当我们修改引用类型变量是,其修改的将作用于实际引用的变量上。 如果当我们使用&amp;amp;符号生成一个引用变量时,首先会为&amp;amp;操作生成一个zend_reference结构,zend_reference就是引用类型的结构体,他内嵌一个zval,然后此结构的体zval的v">
 <meta property="og:image" content="http://yoursite.com/photo/img/php引用/未引用前.png">
-<meta property="og:image" content="http://yoursite.com/photo/img/php引用/应用后.png">
-<meta property="og:updated_time" content="2018-08-12T15:10:24.788Z">
+<meta property="og:image" content="http://yoursite.com/photo/img/php引用/引用后.png">
+<meta property="og:updated_time" content="2018-08-12T15:11:33.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php的引用">
 <meta name="twitter:description" content="&amp;amp;&amp;amp;是php中的引用,他并不一种独立的数据类型,而是指向其他数据类型的数据结构,和C语言的指针类似。 具体作用为:当我们修改引用类型变量是,其修改的将作用于实际引用的变量上。 如果当我们使用&amp;amp;符号生成一个引用变量时,首先会为&amp;amp;操作生成一个zend_reference结构,zend_reference就是引用类型的结构体,他内嵌一个zval,然后此结构的体zval的v">
@@ -166,7 +166,7 @@
 <p><img src="/photo/img/php引用/未引用前.png" alt="image"></p>
 <p>此时数据结构,一直指针指向是这个样子。</p>
 <p><strong>步骤2</strong></p>
-<p><img src="/photo/img/php引用/应用后.png" alt="image"></p>
+<p><img src="/photo/img/php引用/引用后.png" alt="image"></p>
 <p>也就是说PHP的引用在使用后新生成一个引用类型机构,然后将引用类型结构指向越来的value,最后将原来zval的value<br>指向新生成的结构体,并将其变量类型变为引用类型,IS_REFERENCE。当然随之改变的还有计数。</p>
 
       
