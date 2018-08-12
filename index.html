@@ -133,6 +133,66 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-php的&amp;符号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/12/php的&符号/">php的引用</a>
+    </h1>
+  
+
+        <a href="/2018/08/12/php的&符号/" class="archive-article-date">
+  	<time datetime="2018-08-12T14:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-12</time>
+</a>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h3><p>&amp;是php中的引用,他并不一种独立的数据类型,而是指向其他数据类型的数据结构,和C语言的指针类似。</p>
+<p>具体作用为:当我们修改引用类型变量是,其修改的将作用于实际引用的变量上。</p>
+<p>如果当我们使用&amp;符号生成一个引用变量时,首先会为&amp;操作生成一个zend_reference结构,zend_reference就是引用<br>类型的结构体,他内嵌一个zval,然后此结构的体zval的value指向原来zval的value上。然后将原来zval的变量<br>类型变为IS_REFERENCE,原来zval的value执行新创建zend_reference结构。<br>索引&amp;的作用就是新生成zend_reference,然后将其指向原来的zval的value上,顺便把原来zval的变量类型变化为引用类型。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> _zend_reference &#123;</div><div class="line">    zend_refcondted_h gc;</div><div class="line">    zval              val;  指向原来的value.</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$a = &apos;test&apos;; //步骤1</div><div class="line">$b = &amp;$a;    //步骤2</div></pre></td></tr></table></figure>
+<p><strong>步骤1</strong></p>
+<p>现在<code>$a = &#39;&#39;test</code>是他们的数据结构指向为:</p>
+<p><img src="/photo/img/php引用/未引用前.png" alt="image"></p>
+<p>此时数据结构,一直指针指向是这个样子。</p>
+<p><strong>步骤2</strong></p>
+<p><img src="/photo/img/php引用/应用后.png" alt="image"></p>
+<p>也就是说PHP的引用在使用后新生成一个引用类型机构,然后将引用类型结构指向越来的value,最后将原来zval的value<br>指向新生成的结构体,并将其变量类型变为引用类型,IS_REFERENCE。当然随之改变的还有计数。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/08/12/php的&符号/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-swagger" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -703,62 +763,6 @@
 
 
   
-    <article id="post-PHPExecel" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/30/PHPExecel/">PHPExcel</a>
-    </h1>
-  
-
-        <a href="/2017/10/30/PHPExecel/" class="archive-article-date">
-  	<time datetime="2017-10-30T02:42:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-30</time>
-</a>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="PHPEXcel"><a href="#PHPEXcel" class="headerlink" title="PHPEXcel"></a>PHPEXcel</h1><hr>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在工作中我们肯定会遇到由于后端管理系统不完善，而导致运营同学无法从管理系统获取想要的数据。亦或程序设计之初没有考虑到完善，导致一些必要的数据没有录入，希望后续补充批量导入。在这个时候我们就需要获取从数据批量导出数据或者导入数据，而无论导入还是导出数据，我们都希望是Excel格式。</p>
-<h2 id="根据Execel生成sql"><a href="#根据Execel生成sql" class="headerlink" title="根据Execel生成sql"></a>根据Execel生成sql</h2><p>1.PHPExcel</p>
-<p>准备：我们需要从github获取PHPExcel工具包。地址 <code>https://github.com/PHPOffice/PHPExcel</code> </p>
-<p>打开PHPExcel文件夹，看下代码结构。我们需要的主要代码在<code>Classes</code>文件下，我们只需要引入<code>PHPExcel.php</code>即可。</p>
-<p>代码实现<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">'./code/web_code/PHPExcel/Classes/PHPExcel.php'</span>;<span class="comment">//引入必要的第三方依赖</span></div><div class="line">$inputFileType = <span class="string">'Excel2007'</span>;<span class="comment">//设置Excel的版本</span></div><div class="line">$inputFileName = <span class="string">'./targe.xlsx'</span>;<span class="comment">// 需要导入文件地址</span></div><div class="line"></div><div class="line"></div><div class="line">$currentsheet = $objPHPExcel-&gt;getSheet(<span class="number">0</span>); <span class="comment">//选择Excel页</span></div><div class="line">$maxColumn = $currentsheet-&gt;getHighestColumn(); <span class="comment">//获取当前页的最大列数</span></div><div class="line">$maxRow = $currentsheet-&gt;getHighestRow(); <span class="comment">//获取当前页的最大行数</span></div><div class="line"></div><div class="line"><span class="comment">//循环拼接sql</span></div><div class="line"><span class="keyword">for</span> ($i=<span class="number">2</span>; $i&lt; $maxRow; $i++) &#123; </div><div class="line">    <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(is_null($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()== <span class="string">'已退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'待退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'已经申请退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'退了'</span> ||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'没有电话'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span>) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(!is_numeric($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span> || <span class="keyword">empty</span>($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()) || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">''</span>) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    $sql_bd_name .= <span class="string">' WHEN '</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue().<span class="string">' THEN '</span>.$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue();</div><div class="line">    $sql_bd_name .= <span class="string">','</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue();</div><div class="line">    $res +=<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//输入，当然这里无论我们用fopen或者其他的输入当属都可以，这里我把结果打到了控制台。</span></div><div class="line"><span class="keyword">echo</span> $sql_bd_name;</div><div class="line"><span class="keyword">echo</span> $res</div></pre></td></tr></table></figure></p>
-<p>我们生成的sql是<code>WHEN</code>  <code>THEN</code>的样式，完整语句应该是 update tablename set seller_jn_activity CASE id<br>WHEN 1 TEHN 2<br>END,<br>bd_jn_activity CASE id<br>when 2 THEN 3<br>END<br>WHERE in (1,2,3)</p>
-<p>发现数据清洗其实是一件很麻烦的事。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/30/PHPExecel/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -821,11 +825,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">分布式,事务</a>
+                <a href="javascript:void(0)">python, shell, crond</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python, shell, crond</a>
+                <a href="javascript:void(0)">分布式,事务</a>
               </li>
              
               <li class="article-tag-list-item">
