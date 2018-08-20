@@ -169,6 +169,8 @@
 <li>val 字符串内容</li>
 </ul>
 <p>我们在这里都会有疑问,为什么存储字符串内容的时候没有使用char*类型,而用了一个数组类型来存储。zend_string<br>在申请内存的时候会会申请malloc(sizeof(zend_string)+字符串长度),且val[0]存的是字符串最后一个字符安“\0”</p>
+<p>zend_string结构在内存中如下所示:</p>
+<p><img src="/photo/img/php数据结构/zend_stirng内存中结构.png" alt="image"></p>
 
       
 
