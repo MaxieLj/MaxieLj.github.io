@@ -17,7 +17,7 @@
 <meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/php数组具体实现.png">
 <meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/hashtable.png">
 <meta property="og:image" content="http://yoursite.com/photo/img/php数组实现/链表冲突.png">
-<meta property="og:updated_time" content="2018-08-23T10:38:58.461Z">
+<meta property="og:updated_time" content="2018-08-23T10:43:47.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php数组实现">
 <meta name="twitter:description" content="要说php的数组,就不得不讲hashtable,以为php的数组是强依赖于hashtable实现的。一般 Times33的算法很简单，就是不断的乘33,下边是times33算法: Times33(hash)12345678910111213141516&amp;lt;?phpfunction myHash($str) &amp;#123;    // hash(i) = hash(i-1) * 33 + str[">
@@ -216,9 +216,8 @@
 <p>在处理的过程中还会把已经删除的<code>Bucket</code>给删除。</p>
 <p>具体的操作在<code>zend_hash.c</code>文件里。<br>如果超过阈值,则会把已经删除<code>Bucket</code>移除,然后把又有后边的元素往前移动,不上空缺的<code>Bucket</code>,当然索引也会重建。</p>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://nikic.github.io/2015/06/19/Internal-value-representation-in-PHP-7-part-2.html" target="_blank" rel="noopener">Internal value representation in PHP 7 - Part 2 </a></li>
-<li><a href="https://0x1.im/blog/php/Internal-value-representation-in-PHP-7-part-2.html" target="_blank" rel="noopener">[译]变量在 PHP7 内部的实现（二）</a></li>
-<li><a href="https://www.kancloud.cn/nickbai/php7/363268" target="_blank" rel="noopener">php内核分析——2.1 变量的内部实现</a></li>
+<li><a href="https://www.cnblogs.com/52fhy/p/5007456.html" target="_blank" rel="noopener">time33 </a></li>
+<li><a href="https://github.com/pangudashu/php7-internal/blob/master/2/zval.md" target="_blank" rel="noopener">2.1 变量的内部实现</a></li>
 </ul>
 
       
@@ -384,11 +383,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">python, shell, crond</a>
+                <a href="javascript:void(0)">分布式,事务</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)">分布式,事务</a>
+                <a href="javascript:void(0)">python, shell, crond</a>
               </li>
              
               <li class="article-tag-list-item">
