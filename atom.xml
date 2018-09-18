@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-25T08:24:48.893Z</updated>
+  <updated>2018-09-12T13:28:00.782Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>php内存分配</title>
+    <link href="http://yoursite.com/2018/09/12/php%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/"/>
+    <id>http://yoursite.com/2018/09/12/php内存分配/</id>
+    <published>2018-09-12T13:28:00.000Z</published>
+    <updated>2018-09-12T13:28:00.782Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>php闭包</title>
@@ -132,8 +146,8 @@
   
   <entry>
     <title>设计模式1</title>
-    <link href="http://yoursite.com/2018/08/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F1/"/>
-    <id>http://yoursite.com/2018/08/01/设计模式1/</id>
+    <link href="http://yoursite.com/2018/08/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/08/01/设计模式/</id>
     <published>2018-08-01T12:53:15.000Z</published>
     <updated>2018-08-02T10:12:34.678Z</updated>
     
@@ -251,19 +265,20 @@
   </entry>
   
   <entry>
-    <title>solr-从控制页面删除数据</title>
+    <title>solr-增删改查</title>
     <link href="http://yoursite.com/2018/06/21/solr-%E4%BB%8E%E6%8E%A7%E5%88%B6%E9%A1%B5%E9%9D%A2%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE/"/>
     <id>http://yoursite.com/2018/06/21/solr-从控制页面删除数据/</id>
     <published>2018-06-21T12:21:18.000Z</published>
-    <updated>2018-06-21T12:30:05.551Z</updated>
+    <updated>2018-09-18T09:30:55.557Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="1-xml"><a href="#1-xml" class="headerlink" title="1.xml"></a>1.xml</h1><p><img src="/photo/img/2018-06-21/DingTalk20180621202319.png" alt="image"></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;delete&gt;&lt;query&gt;*:*&lt;/query&gt;&lt;/delete&gt;</div><div class="line">&lt;commit/&gt;</div></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>solr 版本 5.3.1</p><h3 id="1-删除数据"><a href="#1-删除数据" class="headerlink" title="1.删除数据"></a>1.删除数据</h3><p>solr 提供多重删除数据方式, 从控制页删除数据是一种方式,主要用于人工删除少量数据<br>eg:<br><img src="/photo/img/solr-增删改查/DingTalk20180621202319.png" alt="image"></p><p>执行删除操作之前:</p><p><img src="/photo/img/solr-增删改查/执行删除前数据.png" alt="image"></p><p>删除操作只需在控制页Document Type 选择XML选项,然后输入一下内容提交即可。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;commit/&gt;</div><div class="line">&lt;delete&gt;&lt;query&gt;id:change.me1&lt;/query&gt;&lt;/delete&gt;</div><div class="line">&lt;commit/&gt;</div></pre></td></tr></table></figure><p>具体执行,以及http请求:</p><p><img src="/photo/img/solr-增删改查/执行删除操作.png" alt="image"></p><p>最后为执行删除后的结果:</p><p><img src="/photo/img/solr-增删改查/执行删除操作结果.png" alt="image"></p><h3 id="新增数据"><a href="#新增数据" class="headerlink" title="新增数据"></a>新增数据</h3><h4 id="json-方式添加数据"><a href="#json-方式添加数据" class="headerlink" title="json 方式添加数据"></a>json 方式添加数据</h4><p>同样在solr的控制页面,选在Document Type为json。</p><p>输入:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;id&quot;:&quot;ceshi2&quot;,&quot;title&quot;:&quot;这是一个测试&quot;&#125;</div></pre></td></tr></table></figure><p><img src="/photo/img/solr-增删改查/新增数据.png" alt="image"></p><p>可以看出来solr是已http请求的方式请求 solr server,所以我们用程序去查询solr数据是,也可json的方式去查询。<br>当然solr支持xml等多种功能。（solr支持从数据库导入数据）<br>具体查询规则（目前还没找到,找到后补充）:</p><p>执行结果</p><p><img src="/photo/img/solr-增删改查/执行结果.png" alt="image"></p><h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><p>第一个问题:solr不支持局部更新。<br>所有的更新操作对于solr来说都是一次数据的删除和插入,例如:</p><p><img src="/photo/img/solr-增删改查/更新操作.png" alt="image"></p><p>同事又说支持局部更新,但是我还没有找到相关文档,这个带求证</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;1-xml&quot;&gt;&lt;a href=&quot;#1-xml&quot; class=&quot;headerlink&quot; title=&quot;1.xml&quot;&gt;&lt;/a&gt;1.xml&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;/photo/img/2018-06-21/DingTalk20180621202319.png
+        &lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot; title=&quot;背景&quot;&gt;&lt;/a&gt;背景&lt;/h2&gt;&lt;p&gt;solr 版本 5.3.1&lt;/p&gt;
+&lt;h3 id=&quot;1-删除数据&quot;&gt;&lt;a href=&quot;#1-删除数据&quot; class=&quot;headerlink&quot;
       
     
     </summary>
@@ -453,27 +468,6 @@
     
     
       <category term="curl" scheme="http://yoursite.com/tags/curl/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>github</title>
-    <link href="http://yoursite.com/2015/06/26/github/"/>
-    <id>http://yoursite.com/2015/06/26/github/</id>
-    <published>2015-06-26T14:04:09.000Z</published>
-    <updated>2018-06-19T10:35:14.525Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="关于Git的使用"><a href="#关于Git的使用" class="headerlink" title="#关于Git的使用  "></a>#关于Git的使用  </h2><h2 id="Git的安装和使用"><a href="#Git的安装和使用" class="headerlink" title="Git的安装和使用"></a>Git的安装和使用</h2><p> 准备工作：</p><blockquote><ul><li>下载git 客户端 <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">链接地址</a></li></ul></blockquote><p>下载完毕后，安装一路一下一步。<br>安装完成之后我们开始使用Git<br>使用前我们需要告诉Git，我们是谁。所以需要配置一些信息，来确定我们的身份。</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git config –global user.name “用户名”</div><div class="line">git config –global user.email “邮箱”</div></pre></td></tr></table></figure><p>第一条命令用来告诉 git 我们的名字（以后链接github）<br>第二条命令用来告诉git 我们的邮箱</p><p>到此我们就可以使用Git了</p><h2 id="链接github"><a href="#链接github" class="headerlink" title="链接github"></a>链接github</h2><p>如果我们希望把自己的项目托管在github我们就需要再做一些配置</p><p>首先我们需要生成ssh,使用以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen –t rsa –C</div></pre></td></tr></table></figure></p><ol><li>然后他提示的默认路径生成一些文件，或者你自己配置路径。 在生成过程中会让你输入密码，可以不输入，一路回车<br>生成完毕后，会在你选择路径下生成两个文件 一个是 .rsa 一个是 .pub 我们这里只需要.pub里的内容 复制里边的内容</li><li>接下来我们需要把文件里的key添加到我们的github账号里。 首先我们登陆我们的github账号。 然后在设置里 NEW SSH KEY 添加描述然后把我们的key复制到里边即可。</li></ol><p>不过在提交之前我们还需要做一些配置来确定我们需要把当前库的代码推送到github账号的哪个库里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin git@github.com:aaa/xxx</div></pre></td></tr></table></figure></p><p>在上边的配置的命令中，aaa表示的我们的github账号。xxx使我们的库文件。<br>以后就可以使用git来进行版本管理和推送到github里了。<br>正常操作代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git status</div><div class="line">git add .</div><div class="line">git commit -a &apos;message&apos;</div><div class="line">git push</div></pre></td></tr></table></figure></p><p>提交完毕。</p><p>如果我们需要在其他电脑上使用我们托管的代码，我们需要使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull</div></pre></td></tr></table></figure></p><p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git colne &apos;address&apos;</div></pre></td></tr></table></figure></p><p>来从github上获取我们所需要的代码</p><p>如果在配置过程中出现错误，按照提示的代码解决即可。<br>当然在此如果我们直接使用了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit -a</div></pre></td></tr></table></figure></p><p>会弹出来vim窗口，在这里写一些vim的命令<br>在非insert状态下我们使用ctrl+d来批量选择#，然后按d删除</p><p>在飞插入模式写:wq 保存并推出</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;关于Git的使用&quot;&gt;&lt;a href=&quot;#关于Git的使用&quot; class=&quot;headerlink&quot; title=&quot;#关于Git的使用  &quot;&gt;&lt;/a&gt;#关于Git的使用  &lt;/h2&gt;&lt;h2 id=&quot;Git的安装和使用&quot;&gt;&lt;a href=&quot;#Git的安装和使用&quot; cla
-      
-    
-    </summary>
-    
     
   </entry>
   
