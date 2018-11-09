@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/09/28/%E4%BD%BF%E7%94%A8guzzle%E5%B9%B6%E8%A1%8C%E8%AF%B7%E6%B1%82/</loc>
+    
+    <lastmod>2018-11-09T01:53:42.848Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/09/12/php%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/</loc>
     
     <lastmod>2018-11-09T01:50:02.555Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>http://yoursite.com/2015/06/02/hexo-git-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
     
     <lastmod>2018-10-22T03:27:54.674Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/09/28/%E4%BD%BF%E7%94%A8guzzle%E5%B9%B6%E8%A1%8C%E8%AF%B7%E6%B1%82/</loc>
-    
-    <lastmod>2018-10-22T02:59:05.635Z</lastmod>
     
   </url>
   
