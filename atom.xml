@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-10T08:11:01.540Z</updated>
+  <updated>2019-01-14T10:02:16.149Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,55 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode-221 Maximal Square</title>
+    <link href="http://yoursite.com/2019/01/14/%E7%AE%97%E6%B3%95-%E6%B1%82%E6%9C%80%E5%A4%A7%E6%AD%A3%E6%96%B9%E5%BD%A2%E9%9D%A2%E5%9F%BA/"/>
+    <id>http://yoursite.com/2019/01/14/算法-求最大正方形面基/</id>
+    <published>2019-01-14T09:18:04.000Z</published>
+    <updated>2019-01-14T10:02:16.149Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="英文"><a href="#英文" class="headerlink" title="英文"></a>英文</h3><p>Given a 2D binary matrix filled with 0’s and 1’s, find the largest square containing only 1’s and return its area.</p><p>Example:</p><p>Input: </p><p>1 0 1 0 0<br>1 0 1 1 1<br>1 1 1 1 1<br>1 0 0 1 0</p><p>Output: 4</p><h3 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h3><p>在一个由 0 和 1 组成的二维矩阵内，找到只包含 1 的最大正方形，并返回其面积。</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul><li>动态规划(主要用户将一个复杂的问题分解为多个建单的问题，求最优解时)。</li><li>声明一个空间和原有二位数据大小一样的二位数组(tmp[i][j])。</li><li>计算每一个节点最大正方形的边长，并存储与该节点（利用之前节点计算当前节点最大正方形边长）。</li><li>取tmp[i][j]得最大值的平凡返回。<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2></li></ul><p><code>第一版代码</code></p><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">maximalSquare</span><span class="params">($matrix)</span> </span>&#123;</div><div class="line">      $hight =  count($matrix);</div><div class="line">      <span class="keyword">if</span>($hight&lt;<span class="number">1</span>)</div><div class="line">      &#123;</div><div class="line">          <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">      &#125;</div><div class="line">      $wide = <span class="number">0</span>;</div><div class="line">      <span class="keyword">if</span>($hight &gt; <span class="number">0</span>)&#123;</div><div class="line">          $wide= count($matrix[<span class="number">0</span>]);</div><div class="line">      &#125;</div><div class="line">      $ret = <span class="number">0</span>;</div><div class="line">      <span class="keyword">for</span>($i = <span class="number">1</span>; $i&lt;= $hight; $i++)</div><div class="line">      &#123;</div><div class="line">          $tmp = <span class="keyword">$this</span>-&gt;getRet($matrix, $i, $hight, $wide);</div><div class="line">          <span class="keyword">if</span>($ret &lt;$tmp )&#123;</div><div class="line">              $ret = $tmp;</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> $ret;</div><div class="line">  &#125;</div><div class="line">    </div><div class="line">  <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getRet</span><span class="params">($matrix, $i, $hight, $wide)</span></span></div><div class="line">  &#123;</div><div class="line">    <span class="comment">//起始点纵向坐标  </span></div><div class="line">    <span class="keyword">for</span>($h = <span class="number">0</span>; $h&lt;= $hight-$i; $h++ )</div><div class="line">    &#123;   </div><div class="line">        <span class="keyword">for</span>($j = <span class="number">0</span>;$j &lt;= $wide-$i; $j++)</div><div class="line">        &#123;</div><div class="line">            <span class="comment">//h 为起点高，j为起点宽。</span></div><div class="line">            $ret = <span class="number">1</span>;</div><div class="line">            <span class="keyword">for</span>($m = $h; $m &lt;$h + $i; $m++)&#123;</div><div class="line">                <span class="keyword">for</span>($k = $j; $k &lt; $j + $i; $k++)&#123;</div><div class="line">                    <span class="keyword">if</span>($matrix[$m][$k] == <span class="number">0</span>)</div><div class="line">                    &#123;</div><div class="line">                        $ret = <span class="number">0</span>;</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>($ret == <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>($ret == <span class="number">1</span>)&#123;</div><div class="line">                <span class="keyword">return</span> $i*$i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">  &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure><p>用php跑测试用例，跑了2.5秒。😓</p><p>回头用c重写下试试。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">待定</div></pre></td></tr></table></figure></p><h2 id="最优解"><a href="#最优解" class="headerlink" title="最优解"></a>最优解</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximalSquare</span><span class="params">(<span class="keyword">char</span>[][] matrix)</span> </span>&#123;</div><div class="line">        <span class="comment">/**</span></div><div class="line">        dp[i][j]表示以第i行第j列为右下角所能构成的最大正方形边长, 则递推式为: </div><div class="line">        dp[i][j] = 1 + min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]);</div><div class="line">        **/</div><div class="line">        <span class="keyword">int</span> m = matrix.length;</div><div class="line">        <span class="keyword">if</span>(m &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> n = matrix[<span class="number">0</span>].length;</div><div class="line">        <span class="keyword">int</span> max = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[m+<span class="number">1</span>][n+<span class="number">1</span>];</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</div><div class="line">                <span class="keyword">if</span>(matrix[i-<span class="number">1</span>][j-<span class="number">1</span>] == <span class="string">'1'</span>) &#123;</div><div class="line">                    dp[i][j] = <span class="number">1</span> + Math.min(dp[i-<span class="number">1</span>][j-<span class="number">1</span>], Math.min(dp[i-<span class="number">1</span>][j], dp[i][j-<span class="number">1</span>]));</div><div class="line">                    max = Math.max(max, dp[i][j]); </div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> max*max;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;h3 id=&quot;英文&quot;&gt;&lt;a href=&quot;#英文&quot; class=&quot;headerlink&quot; title=&quot;英文&quot;&gt;&lt;/a&gt;英文&lt;/h3&gt;&lt;p&gt;Giv
+      
+    
+    </summary>
+    
+      <category term="算法" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>二叉树最近公共祖先</title>
+    <link href="http://yoursite.com/2019/01/10/%E7%AE%97%E6%B3%95-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+    <id>http://yoursite.com/2019/01/10/算法-二叉树最近公共祖先/</id>
+    <published>2019-01-10T14:59:11.000Z</published>
+    <updated>2019-01-10T15:00:33.601Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p><p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p><p>例如，给定如下二叉树:  root = [3,5,1,6,2,0,8,null,null,7,4]</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftFist</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="keyword">struct</span> TreeNode* p, <span class="keyword">struct</span> TreeNode*  q)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">    <span class="keyword">if</span>(root-&gt;left) &#123;</div><div class="line">        ret =  ret + leftFist(root-&gt;left, p, q);</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(root-&gt;right)&#123;</div><div class="line">        ret = ret+ leftFist(root-&gt;right, p, q);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(root == p) &#123;</div><div class="line">        ret +=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(root == q) &#123;</div><div class="line">        ret +=<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> ret;</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     struct TreeNode *left;</div><div class="line"> *     struct TreeNode *right;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">struct</span> TreeNode* <span class="title">lowestCommonAncestor</span><span class="params">(<span class="keyword">struct</span> TreeNode* root, <span class="keyword">struct</span> TreeNode* p, <span class="keyword">struct</span> TreeNode* q)</span> </span>&#123;</div><div class="line">    <span class="keyword">struct</span> TreeNode* retRoot = <span class="literal">NULL</span> ;</div><div class="line">    <span class="keyword">int</span> retSum =  leftFist(root, p, q);</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(retSum ==  <span class="number">2</span>) &#123;</div><div class="line">        <span class="keyword">int</span> retSumleft = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span>(root-&gt;left) &#123;</div><div class="line">            retSumleft = leftFist(root-&gt;left, p, q);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="number">0</span> &lt; retSumleft &amp;&amp;  retSumleft &lt; <span class="number">2</span>) &#123;</div><div class="line">            <span class="comment">// printf("retSumleft:%d,", root-&gt;left-&gt;val);</span></div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> retSumright = <span class="literal">NULL</span>;</div><div class="line">        <span class="keyword">if</span>(root-&gt;right) &#123;</div><div class="line">            retSumright = leftFist(root-&gt;right, p, q);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="number">0</span> &lt; retSumright &amp;&amp; retSumright&lt; <span class="number">2</span>) &#123;</div><div class="line">            <span class="comment">// printf("retSumright:%d", root-&gt;right-&gt;val);</span></div><div class="line">            <span class="keyword">return</span> root;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(root-&gt;left) &#123;</div><div class="line">        retRoot =  lowestCommonAncestor(root-&gt;left, p, q);</div><div class="line">        <span class="keyword">if</span>(retRoot) &#123;</div><div class="line">            <span class="keyword">return</span> retRoot;</div><div class="line">        &#125;</div><div class="line">    &#125; </div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(root-&gt;right)&#123;</div><div class="line">        retRoot =  lowestCommonAncestor(root-&gt;right, p, q);</div><div class="line">        <span class="keyword">if</span>(retRoot) &#123;</div><div class="line">            <span class="keyword">return</span> retRoot;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> retRoot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;题目&quot;&gt;&lt;a href=&quot;#题目&quot; class=&quot;headerlink&quot; title=&quot;题目&quot;&gt;&lt;/a&gt;题目&lt;/h2&gt;&lt;p&gt;给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。&lt;/p&gt;
+&lt;p&gt;百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>合并k个链表</title>
@@ -207,32 +256,6 @@
   </entry>
   
   <entry>
-    <title>微服务数据一致性和服务可靠性</title>
-    <link href="http://yoursite.com/2018/09/12/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%AF%E9%9D%A0%E6%80%A7/"/>
-    <id>http://yoursite.com/2018/09/12/微服务数据一致性和服务可靠性/</id>
-    <published>2018-09-12T13:28:00.000Z</published>
-    <updated>2019-01-08T10:58:52.015Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/photo/img/2018-06-19/servicePic1.png" alt="image"></p><h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>  我们的保证金服务现有结构是这个样子。<br>在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。<br>超时存在问题：<br>1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。<br>2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？</p><h2 id="如何提高服务可靠性"><a href="#如何提高服务可靠性" class="headerlink" title="如何提高服务可靠性"></a>如何提高服务可靠性</h2><p>对于上游服务，如何保证对下游提供可靠的服务。</p><h3 id="补偿机制"><a href="#补偿机制" class="headerlink" title="补偿机制"></a>补偿机制</h3><p> <img src="/photo/img/2018-06-19/servicePic5.png" alt="image"><br> 在服务间的调用失败时，可以记录失败调用，如队列，消费重试。但是前提一定是接口幂等。<br> 但是这样并不能解决根本性问题，如果我们在调用保证金冻结服务时，失败此时我们冻结时报操作入队列，让队列异步消费，如果此时要解冻保证金，就会出现业务异常。</p><p> <strong>所以</strong>补偿机制建议使用在 <code>不可避免的业务异常情况下使用</code>，我们应该尽可能的优化技术方案，来保证数据一致性，最后再采用补偿机制。</p><h3 id="两段提交协议（2pc）"><a href="#两段提交协议（2pc）" class="headerlink" title="两段提交协议（2pc）"></a>两段提交协议（2pc）</h3><p><img src="/photo/img/2018-06-19/servicePic4.png" alt="image"></p><p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p><p><img src="/photo/img/2018-06-19/servicePic3.png" alt="image"><br>即使是这样也会存在问题，如果保证金预操作成功，但是执行一直失败呢？我们必须提供回滚机制。<br><img src="/photo/img/2018-06-19/servicePic2.png" alt="image"></p><ol><li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。</li><li>调用依赖服务失败，如何降级处理？<br>  在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？</li><li>是否还欠缺回滚机制？ </li></ol>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;/photo/img/2018-06-19/servicePic1.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
-&lt;h2 id=&quot;存在问题&quot;&gt;&lt;a href=&quot;#存在问题&quot; class=&quot;headerlink&quot; title=&quot;存在问题&quot;&gt;&lt;/a&gt;存在问题&lt;
-      
-    
-    </summary>
-    
-      <category term="微服务" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-    
-      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
-  </entry>
-  
-  <entry>
     <title>php垃圾回收</title>
     <link href="http://yoursite.com/2018/09/12/php%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"/>
     <id>http://yoursite.com/2018/09/12/php垃圾回收/</id>
@@ -260,6 +283,32 @@
     
     
       <category term="php源码" scheme="http://yoursite.com/tags/php%E6%BA%90%E7%A0%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微服务数据一致性和服务可靠性</title>
+    <link href="http://yoursite.com/2018/09/12/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8F%AF%E9%9D%A0%E6%80%A7/"/>
+    <id>http://yoursite.com/2018/09/12/微服务数据一致性和服务可靠性/</id>
+    <published>2018-09-12T13:28:00.000Z</published>
+    <updated>2019-01-08T10:58:52.015Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/photo/img/2018-06-19/servicePic1.png" alt="image"></p><h2 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h2><p>  我们的保证金服务现有结构是这个样子。<br>在 1、2、3、4、5、6 各个阶段都会存在超时和异常问题，当负载少时，我们还可以手动人工处理，但是当数据量大的时候，问题或多的令人发指，沉浸于洗数据，无法自拔。。<br>超时存在问题：<br>1.当1、2、3 步骤超时时，下游服务可以忽略，当做执行失败，重试。<br>2.当在环节4、5、6超时时，对于下游服务是也是执行失败，但是还可以重试么？</p><h2 id="如何提高服务可靠性"><a href="#如何提高服务可靠性" class="headerlink" title="如何提高服务可靠性"></a>如何提高服务可靠性</h2><p>对于上游服务，如何保证对下游提供可靠的服务。</p><h3 id="补偿机制"><a href="#补偿机制" class="headerlink" title="补偿机制"></a>补偿机制</h3><p> <img src="/photo/img/2018-06-19/servicePic5.png" alt="image"><br> 在服务间的调用失败时，可以记录失败调用，如队列，消费重试。但是前提一定是接口幂等。<br> 但是这样并不能解决根本性问题，如果我们在调用保证金冻结服务时，失败此时我们冻结时报操作入队列，让队列异步消费，如果此时要解冻保证金，就会出现业务异常。</p><p> <strong>所以</strong>补偿机制建议使用在 <code>不可避免的业务异常情况下使用</code>，我们应该尽可能的优化技术方案，来保证数据一致性，最后再采用补偿机制。</p><h3 id="两段提交协议（2pc）"><a href="#两段提交协议（2pc）" class="headerlink" title="两段提交协议（2pc）"></a>两段提交协议（2pc）</h3><p><img src="/photo/img/2018-06-19/servicePic4.png" alt="image"></p><p>preOperation 执行请求，在调用微服务前，执行预操作成功则表示此次操作可行。<br>如果commit失败该如何处理？重新preOperetion嘛？如果接口幂等是否可以重复，commit？如何保证避免重复提交？<br>在preOperation时，返回唯一操作ID，业务逻辑每个操作对应一个操作ID，commit失败就重试，当然前提是我们的上有服务接口幂等。</p><p><img src="/photo/img/2018-06-19/servicePic3.png" alt="image"><br>即使是这样也会存在问题，如果保证金预操作成功，但是执行一直失败呢？我们必须提供回滚机制。<br><img src="/photo/img/2018-06-19/servicePic2.png" alt="image"></p><ol><li>大量同步RPC依赖，如何保证自身服务可靠性？<br>  服务之间在调用的时候，会存在大量异常、超时。我该如何处理，认为这次是失败的？还是成功的？如果依赖的服务返回成功，才算成功的话，我改如何保证服务可靠性，该如何对我的下游服务提供可靠的服务。</li><li>调用依赖服务失败，如何降级处理？<br>  在服务调用失败的时候，我的上游出错了，我该如何降级处理，我该重试？还是直接跳过，跳过后是否会造成微服务之间数据一致性问题。如果重试是否会造成重复提交，接口是否幂等？</li><li>是否还欠缺回滚机制？ </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/photo/img/2018-06-19/servicePic1.png&quot; alt=&quot;image&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;存在问题&quot;&gt;&lt;a href=&quot;#存在问题&quot; class=&quot;headerlink&quot; title=&quot;存在问题&quot;&gt;&lt;/a&gt;存在问题&lt;
+      
+    
+    </summary>
+    
+      <category term="微服务" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+    
+      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
@@ -497,59 +546,6 @@
     
     
       <category term="折腾" scheme="http://yoursite.com/tags/%E6%8A%98%E8%85%BE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHPExcel</title>
-    <link href="http://yoursite.com/2017/10/30/PHPExecel/"/>
-    <id>http://yoursite.com/2017/10/30/PHPExecel/</id>
-    <published>2017-10-30T02:42:03.000Z</published>
-    <updated>2019-01-08T10:55:06.012Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="PHPEXcel"><a href="#PHPEXcel" class="headerlink" title="PHPEXcel"></a>PHPEXcel</h1><hr><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在工作中我们肯定会遇到由于后端管理系统不完善，而导致运营同学无法从管理系统获取想要的数据。亦或程序设计之初没有考虑到完善，导致一些必要的数据没有录入，希望后续补充批量导入。在这个时候我们就需要获取从数据批量导出数据或者导入数据，而无论导入还是导出数据，我们都希望是Excel格式。</p><h2 id="根据Execel生成sql"><a href="#根据Execel生成sql" class="headerlink" title="根据Execel生成sql"></a>根据Execel生成sql</h2><p>1.PHPExcel</p><p>准备：我们需要从github获取PHPExcel工具包。地址 <code>https://github.com/PHPOffice/PHPExcel</code> </p><p>打开PHPExcel文件夹，看下代码结构。我们需要的主要代码在<code>Classes</code>文件下，我们只需要引入<code>PHPExcel.php</code>即可。</p><p>代码实现<br><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">include</span> <span class="string">'./code/web_code/PHPExcel/Classes/PHPExcel.php'</span>;<span class="comment">//引入必要的第三方依赖</span></div><div class="line">$inputFileType = <span class="string">'Excel2007'</span>;<span class="comment">//设置Excel的版本</span></div><div class="line">$inputFileName = <span class="string">'./targe.xlsx'</span>;<span class="comment">// 需要导入文件地址</span></div><div class="line"></div><div class="line"></div><div class="line">$currentsheet = $objPHPExcel-&gt;getSheet(<span class="number">0</span>); <span class="comment">//选择Excel页</span></div><div class="line">$maxColumn = $currentsheet-&gt;getHighestColumn(); <span class="comment">//获取当前页的最大列数</span></div><div class="line">$maxRow = $currentsheet-&gt;getHighestRow(); <span class="comment">//获取当前页的最大行数</span></div><div class="line"></div><div class="line"><span class="comment">//循环拼接sql</span></div><div class="line"><span class="keyword">for</span> ($i=<span class="number">2</span>; $i&lt; $maxRow; $i++) &#123; </div><div class="line">    <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(is_null($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()== <span class="string">'已退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'待退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'已经申请退款'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'退了'</span> ||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'没有电话'</span> || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span>) &#123;</div><div class="line"></div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line">     <span class="comment">//过滤条件</span></div><div class="line">     <span class="keyword">if</span>(!is_numeric($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue())||$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">'0'</span> || <span class="keyword">empty</span>($currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue()) || $currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue() == <span class="string">''</span>) &#123;</div><div class="line">        <span class="keyword">continue</span>;</div><div class="line">     &#125;</div><div class="line"></div><div class="line">    $sql_bd_name .= <span class="string">' WHEN '</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue().<span class="string">' THEN '</span>.$currentsheet-&gt;getCell(<span class="string">'J'</span>.$i)-&gt;getValue();</div><div class="line">    $sql_bd_name .= <span class="string">','</span>.$currentsheet-&gt;getCell(<span class="string">'A'</span>.$i)-&gt;getValue();</div><div class="line">    $res +=<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//输入，当然这里无论我们用fopen或者其他的输入当属都可以，这里我把结果打到了控制台。</span></div><div class="line"><span class="keyword">echo</span> $sql_bd_name;</div><div class="line"><span class="keyword">echo</span> $res</div></pre></td></tr></table></figure></p><p>我们生成的sql是<code>WHEN</code>  <code>THEN</code>的样式，完整语句应该是 update tablename set seller_jn_activity CASE id<br>WHEN 1 TEHN 2<br>END,<br>bd_jn_activity CASE id<br>when 2 THEN 3<br>END<br>WHERE in (1,2,3)</p><p>发现数据清洗其实是一件很麻烦的事。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;PHPEXcel&quot;&gt;&lt;a href=&quot;#PHPEXcel&quot; class=&quot;headerlink&quot; title=&quot;PHPEXcel&quot;&gt;&lt;/a&gt;PHPEXcel&lt;/h1&gt;&lt;hr&gt;
-&lt;h2 id=&quot;背景&quot;&gt;&lt;a href=&quot;#背景&quot; class=&quot;headerlink&quot;
-      
-    
-    </summary>
-    
-      <category term="php" scheme="http://yoursite.com/categories/php/"/>
-    
-    
-      <category term="pear" scheme="http://yoursite.com/tags/pear/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一次HTTP请求</title>
-    <link href="http://yoursite.com/2016/11/20/%E4%B8%80%E6%AC%A1HTTP%E8%AF%B7%E6%B1%82/"/>
-    <id>http://yoursite.com/2016/11/20/一次HTTP请求/</id>
-    <published>2016-11-20T12:09:23.000Z</published>
-    <updated>2019-01-08T10:57:54.762Z</updated>
-    
-    <content type="html"><![CDATA[<p>#一次完整的HTTP请求，以及请求方式的区别</p><hr><p>今天在对接业务组mas时候遇到一个很少遇到的问题，发送一个一个不但参数的POST的请求。<br>在我的印象里传参好像必带名字，因为就像一个你不认识的人要来你家，你肯定不会让他进来的。<br>所以重新缕了一下POST请求，冲冲能。</p><p>##一次HTTP请求的过程</p><p>访问某个网址，例如我们访问www.baidu.com<br>浏览器会和百度的服务器进行三次握手（中间的域名解析等暂不考虑）<br>然后是程序层面的信息请求与提交</p><p>三次握手-&gt;get或者post请求</p><p>1） Client首先发送一个连接试探，ACK=0 表示确认号无效，SYN = 1 表示这是一个连接请求或连接接受报文，同时表示这个数据报不能携带数据，seq = x 表示Client自己的初始序号（seq = 0 就代表这是第0号包），这时候Client进入syn_sent状态，表示客户端等待服务器的回复</p><p>2） Server监听到连接请求报文后，如同意建立连接，则向Client发送确认。TCP报文首部中的SYN 和 ACK都置1 ，ack = x + 1表示期望收到对方下一个报文段的第一个数据字节序号是x+1，同时表明x为止的所有数据都已正确收到（ack=1其实是ack=0+1,也就是期望客户端的第1个包），seq = y 表示Server 自己的初始序号（seq=0就代表这是服务器这边发出的第0号包）。这时服务器进入syn_rcvd，表示服务器已经收到Client的连接请求，等待client的确认。</p><p>3） Client收到确认后还需再次发送确认，同时携带要发送给Server的数据。ACK 置1 表示确认号ack= y + 1 有效（代表期望收到服务器的第1个包），Client自己的序号seq= x + 1（表示这就是我的第1个包，相对于第0个包来说的），一旦收到Client的确认之后，这个TCP连接就进入Established状态，就可以发起http请求了。</p><h2 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h2><p>HTTP 协议是以 ASCII 码传输，建立在TCP/IP协议之上的应用层规范，规范把 HTTP 请求分为三个部分：状态行、请求头、消息主体。类似于下面这样：</p><p><method> <request-url> <version></version></request-url></method></p><p><headers></headers></p><p><entity-body></entity-body><br>协议规定 POST 提交的数据必须放在消息主体（entity-body）中，但协议并没有规定数据必须使用什么编码方式。实际上，开发者完全可以自己决定消息主体的格式，只要最后发送的 HTTP 请求满足上面的格式就可以。</p><p>但是，数据发送出去，还要服务端解析成功才有意义。一般服务端语言如 php、python 等，以及它们的 framework，都内置了自动解析常见数据格式的功能。服务端通常是根据请求头（headers）中的 Content-Type 字段来获知请求中的消息主体是用何种方式编码，再对主体进行解析。所以说到 POST 提交数据方案，包含了 Content-Type 和消息主体编码方式两部分。下面就正式开始介绍它们。</p><p>header<br>Content-Type，内容类型，一般是指网页中存在的Content-Type，用于定义网络文件的类型和网页的编码，决定文件接收方将以什么形式、什么编码读取这个文件.<br>当然还有UA等其他头信息，</p><p>Content-Type对照表：<a href="http://tool.oschina.net/commons" target="_blank" rel="noopener">http://tool.oschina.net/commons</a></p><p>说几种常见的Content-Type</p><p>1.application/x-www-form-urlencoded<br>这个就是我们常见form表格提的方式</p><p>2.multipart/form-data</p><p>这又是一个常见的 POST 数据提交的方式。我们使用表单上传文件时，必须让 form 的 enctyped 等于这个值。直接来看一个请求示例</p><p>3.application/json</p><p>application/json 这个 Content-Type 作为响应头大家肯定不陌生。实际上，现在越来越多的人把它作为请求头，用来告诉服务端消息主体是序列化后的 JSON 字符串。由于 JSON 规范的流行，除了低版本 IE 之外的各大浏览器都原生支持 JSON.stringify，服务端语言也都有处理 JSON 的函数，使用 JSON 不会遇上什么麻烦。</p><p>so 用这种格式就可以传递非Key Val的数据</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;#一次完整的HTTP请求，以及请求方式的区别&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;今天在对接业务组mas时候遇到一个很少遇到的问题，发送一个一个不但参数的POST的请求。&lt;br&gt;在我的印象里传参好像必带名字，因为就像一个你不认识的人要来你家，你肯定不会让他进来的。&lt;br&gt;所以重新缕了一
-      
-    
-    </summary>
-    
-      <category term="网络" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C/"/>
-    
-    
-      <category term="网络" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C/"/>
     
   </entry>
   
