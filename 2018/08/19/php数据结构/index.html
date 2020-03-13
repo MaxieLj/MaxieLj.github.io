@@ -19,7 +19,7 @@
 <p>zend_string结构在内存中如下所示:</p>
 <p><img src="/photo/img/php数据结构/zend_stirng内存中结构.png" alt="image"></p>
 <p>当时也在char val[1]的地方疑惑了很久,再往上找了很多文章,其中<br>Nikita Popov(nikic，PHP 官方开发组成员，柏林科技大学的学生) 这样解释</p>
-<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果你对 C 语言了解的不是很深入的话，可能会觉得 <span class="keyword">val</span> 的定义有些奇怪：这个声明只有一个元素，但是显然我们想存储的字符串长度肯定大于一个字符的长度。这里其实使用的是结构体的一个『黑』方法：在声明数组时只定义一个元素，但是实际创建 zend_string 时再分配足够的内存来存储整个字符串。这样我们还是可以通过 <span class="keyword">val</span> 访问完整的字符串。</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果你对 C 语言了解的不是很深入的话，可能会觉得 val 的定义有些奇怪：这个声明只有一个元素，但是显然我们想存储的字符串长度肯定大于一个字符的长度。这里其实使用的是结构体的一个『黑』方法：在声明数组时只定义一个元素，但是实际创建 zend_string 时再分配足够的内存来存储整个字符串。这样我们还是可以通过 val 访问完整的字符串。</div></pre></td></tr></table></figure>
 <h2 id="参考"><a href="#参考" class="headerlink" title="参考:"></a>参考:</h2><ul>
 <li><a href="https://nikic.github.io/2015/06/19/Internal-value-representation-in-PHP-7-part-2.html" target="_blank" rel="noopener">Internal value representation in PHP 7 - Part 2 </a></li>
 <li><a href="https://0x1.im/blog/php/Internal-value-representation-in-PHP-7-part-2.html" target="_blank" rel="noopener">[译]变量在 PHP7 内部的实现（二）</a></li>

@@ -3,12 +3,12 @@
 <p>The solution set must not contain duplicate triplets.</p>
 <p>Example:</p>
 <p>Given array nums = [-1, 0, 1, 2, -1, -4],</p>
-<figure class="highlight inform7"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A solution set <span class="keyword">is</span>:</div><div class="line"><span class="comment">[</span></div><div class="line">  <span class="comment">[-1, 0, 1]</span>,</div><div class="line">  <span class="comment">[-1, -1, 2]</span></div><div class="line">]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">A solution set is:</div><div class="line">[</div><div class="line">  [-1, 0, 1],</div><div class="line">  [-1, -1, 2]</div><div class="line">]</div></pre></td></tr></table></figure>
 <h3 id="中文"><a href="#中文" class="headerlink" title="中文"></a>中文</h3><p>给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。</p>
 <p>注意：答案中不可以包含重复的三元组。</p>
 <p>例如, 给定数组 nums = [-1, 0, 1, 2, -1, -4]，</p>
 <p>满足要求的三元组集合为：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  [<span class="number">-1</span>, <span class="number">0</span>, <span class="number">1</span>],</div><div class="line">  [<span class="number">-1</span>, <span class="number">-1</span>, <span class="number">2</span>]</div><div class="line">]</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">  [-1, 0, 1],</div><div class="line">  [-1, -1, 2]</div><div class="line">]</div></pre></td></tr></table></figure>
 <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><ul>
 <li>对数据进行排序（将三数之和转化为两数之和，减少时间复杂度）</li>
 <li>遍历,取<code>当前节点</code>以及<code>当前节点右边非重复两个值</code>（这里利用双指针），比对三个值的和是否等于0。</li>
